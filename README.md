@@ -8,7 +8,7 @@ middleware for assigning a request ID to standard HTTP request contexts.
 Install in the usual [Go][go-project] fashion:
 
 ```sh
-$ go get -u github.com/kenshaw/stringid
+$ go get -u github.com/brankas/stringid
 ```
 
 ## Using
