@@ -1,6 +1,8 @@
 /goji/goji
 /goji/goji.exe
-/uuid/uuid
-/uuid/uuid.exe
+/grpc/grpc
+/grpc/grpc.exe
 /logrus/logrus
 /logrus/logrus.exe
+/uuid/uuid
+/uuid/uuid.exe
