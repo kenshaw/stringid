@@ -9,6 +9,8 @@ import (
 )
 
 func TestPushGenerator(t *testing.T) {
+	t.Parallel()
+
 	pg := NewPushGenerator(nil)
 
 	a, b := pg.Generate(), pg.Generate()
@@ -30,6 +32,8 @@ func TestPushGenerator(t *testing.T) {
 }
 
 func TestPushGeneratorMany(t *testing.T) {
+	t.Parallel()
+
 	pg := NewPushGenerator(nil)
 
 	wg := new(sync.WaitGroup)

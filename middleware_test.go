@@ -14,6 +14,8 @@ import (
 var pushRE = regexp.MustCompile(`^server/[A-Za-z0-9_\-]{20}$`)
 
 func TestMiddleware(t *testing.T) {
+	t.Parallel()
+
 	s := httptest.NewServer(Middleware(WithPrefix("server/"))(readReq))
 	defer s.Close()
 
@@ -37,6 +39,8 @@ func TestMiddleware(t *testing.T) {
 var uuidRE = regexp.MustCompile(`^server/[a-z0-9\-]{36}$`)
 
 func TestMiddlewareUUID(t *testing.T) {
+	t.Parallel()
+
 	s := httptest.NewServer(Middleware(WithPrefix("server/"), WithGenerator(NewUUIDGenerator()))(readReq))
 	defer s.Close()
 
@@ -58,6 +62,8 @@ func TestMiddlewareUUID(t *testing.T) {
 }
 
 func TestHeaderMiddleware(t *testing.T) {
+	t.Parallel()
+
 	s := httptest.NewServer(HeaderMiddleware("x-id")(readReq))
 	defer s.Close()
 
