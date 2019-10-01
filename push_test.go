@@ -73,7 +73,7 @@ func TestPushGeneratorMany(t *testing.T) {
 			}
 			sort.Strings(collected)
 			if !reflect.DeepEqual(collected, all) {
-				t.Errorf("collected keys do not equal generated keys")
+				t.Error("collected keys do not equal generated keys")
 			}
 		}(t, wg, pg)
 	}
