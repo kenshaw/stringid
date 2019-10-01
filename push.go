@@ -2,6 +2,7 @@ package stringid
 
 import (
 	"math/rand"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -15,6 +16,8 @@ const (
 // PushGenerator is a push-style ID generator that satisifies the Generator
 // interface.
 type PushGenerator struct {
+	seed int64
+
 	// mu is the mutex lock.
 	mu sync.Mutex
 
@@ -34,17 +37,24 @@ type PushGenerator struct {
 // NewPushGenerator creates a new push ID generator.
 func NewPushGenerator(r *rand.Rand) *PushGenerator {
 	// ensure rand source
+	var seed int64
 	if r == nil {
-		r = rand.New(rand.NewSource(time.Now().UnixNano()))
+		seed = time.Now().UnixNano()
+		r = rand.New(rand.NewSource(seed))
 	}
 
 	// create generator and random entropy
-	pg := &PushGenerator{r: r}
+	pg := &PushGenerator{r: r, seed: seed}
 	for i := 0; i < 12; i++ {
 		pg.last[i] = r.Intn(64)
 	}
 
 	return pg
+}
+
+// String satisfies the fmt.Stringer interface.
+func (pg *PushGenerator) String() string {
+	return strconv.FormatInt(pg.seed, 10)
 }
 
 // Generate generates a unique, 20-character push-style ID.
