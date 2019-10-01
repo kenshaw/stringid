@@ -1,6 +1,8 @@
 package stringid
 
 import (
+	"reflect"
+	"sort"
 	"strings"
 	"sync"
 	"testing"
@@ -39,21 +41,39 @@ func TestPushGeneratorMany(t *testing.T) {
 
 			var id, prev string
 			ids := make(map[string]bool)
+			all := make([]string, 1000000)
 			for i := 0; i < 1000000; i++ {
 				id = pg.Generate()
 				if n := len(id); n != 20 {
 					t.Errorf("generated id length should be 20, got: %d", n)
 				}
 
+				all[i] = id
 				if _, exists := ids[id]; exists {
 					t.Errorf("generated duplicate id %q", id)
 				}
 
-				if !(strings.Compare(prev, id) < 0) {
+				cmp := strings.Compare(prev, id)
+				switch {
+				case cmp == 0:
+					t.Errorf("previously generated id %q is equal to generated id %q", prev, id)
+				case cmp != -1:
 					t.Errorf("previously generated id %q is not less than generated id %q", prev, id)
 				}
 
 				ids[id], prev = true, id
+			}
+
+			// collect all keys
+			collected := make([]string, 1000000)
+			var i int
+			for k := range ids {
+				collected[i] = k
+				i++
+			}
+			sort.Strings(collected)
+			if !reflect.DeepEqual(collected, all) {
+				t.Errorf("collected keys do not equal generated keys")
 			}
 		}(t, wg, pg)
 	}
