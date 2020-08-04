@@ -5,16 +5,14 @@ import (
 	"fmt"
 	"net/http"
 
-	goji "goji.io"
-	"goji.io/pat"
-
+	"github.com/brankas/goji"
 	"github.com/brankas/stringid"
 )
 
 func main() {
-	mux := goji.NewMux()
+	mux := goji.New()
 	mux.Use(stringid.Middleware())
-	mux.HandleFunc(pat.New("/*"), func(res http.ResponseWriter, req *http.Request) {
+	mux.HandleFunc(goji.NewPathSpec("/*"), func(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(res, "request id: %s\n", stringid.FromContext(req.Context()))
 	})
 	http.ListenAndServe(":3000", mux)

@@ -5,11 +5,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/sirupsen/logrus"
-	goji "goji.io"
-	"goji.io/pat"
-
+	"github.com/brankas/goji"
 	"github.com/brankas/stringid"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -19,9 +17,9 @@ func main() {
 	logger.Out = os.Stdout
 
 	// create mux
-	mux := goji.NewMux()
+	mux := goji.New()
 	mux.Use(stringid.Middleware())
-	mux.HandleFunc(pat.New("/*"), func(res http.ResponseWriter, req *http.Request) {
+	mux.HandleFunc(goji.NewPathSpec("/*"), func(res http.ResponseWriter, req *http.Request) {
 		logger.WithField("id", stringid.FromRequest(req)).Infof("incoming request for %s", req.URL.Path)
 	})
 
