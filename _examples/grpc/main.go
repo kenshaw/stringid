@@ -16,7 +16,7 @@ import (
 	grpc_opentracing "github.com/grpc-ecosystem/go-grpc-middleware/tracing/opentracing"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 
-	"github.com/brankas/stringid/grpcid"
+	"github.com/kenshaw/stringid/grpcid"
 )
 
 func main() {

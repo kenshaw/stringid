@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/brankas/goji"
-	"github.com/brankas/stringid"
+	"github.com/kenshaw/goji"
+	"github.com/kenshaw/stringid"
 	"github.com/sirupsen/logrus"
 )
 

@@ -8,7 +8,7 @@ import (
 	ctxtags "github.com/grpc-ecosystem/go-grpc-middleware/tags"
 	"google.golang.org/grpc"
 
-	"github.com/brankas/stringid"
+	"github.com/kenshaw/stringid"
 )
 
 const (

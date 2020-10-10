@@ -8,7 +8,7 @@ middleware for assigning a request ID to standard HTTP request contexts.
 Install in the usual [Go][go-project] fashion:
 
 ```sh
-$ go get -u github.com/brankas/stringid
+$ go get -u github.com/kenshaw/stringid
 ```
 
 ## Using
@@ -26,7 +26,7 @@ import (
 	goji "goji.io"
 	"goji.io/pat"
 
-	"github.com/brankas/stringid"
+	"github.com/kenshaw/stringid"
 )
 
 func main() {
@@ -43,4 +43,4 @@ func main() {
 Please see the [GoDoc listing][godoc] for the full API listing.
 
 [go-project]: https://golang.org/project
-[godoc]: https://godoc.org/github.com/brankas/stringid
+[godoc]: https://godoc.org/github.com/kenshaw/stringid
